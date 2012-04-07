@@ -30,7 +30,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rvm)
+plugins=(git ruby rvm python)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,12 +60,13 @@ rvm_gemset_name() {
 git_custom_status() {
   local cb=$(current_branch)
   if [ -n "$cb" ]; then
-	echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)%{$reset_color%}%{$fg[red]%}$(parse_git_dirty)%{$reset_color%}$(rvm_gemset_name)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#	echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)%{$reset_color%}%{$fg[red]%}$(parse_git_dirty)%{$reset_color%}$(rvm_gemset_name)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)%{$reset_color%}%{$fg[red]%}$(parse_git_dirty)%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
 drop_beats() {
-	echo "%{$fg[cyan]%}$dharma%{$reset_color%} "
+	echo "%{$fg[red]%}$dharma%{$reset_color%} "
 }
 
-PROMPT='%{$fg[green]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
+PROMPT='%{$fg[blue]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
