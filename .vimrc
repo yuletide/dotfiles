@@ -4,7 +4,6 @@
 " Dependencies:
 "     par
 "     perl
-"     DejaVu Sans Mono
 "     ruby (for Command-T)
 "
 " Last Modified: 11/13/2010
@@ -12,6 +11,9 @@
 
 filetype indent plugin on
 syntax enable
+
+" use Node.js for JavaScript interpretation
+let $JS_CMD='node'
 
 " Options
 " ****************************************************************
@@ -41,7 +43,12 @@ set listchars=tab:\⇒\─,trail:\‣,extends:\↷,precedes:\↶
 set expandtab
 set ts=8
 set sts=4
-set sw=4
+set sw=2
+
+autocmd FileType css,html,htmldjango,javascript,php
+  \ setlocal sw=2 |
+  \ setlocal ts=2
+
 
 " search
 set ignorecase
@@ -63,7 +70,6 @@ set foldmethod=marker
 set display=lastline,uhex
 set sessionoptions+=resize
 
-set makeprg=php\ -l\ %
 set errorformat=%m\ in\ %f\ on\ line\ %1
 
 " set statusline+=%{rvm#statusline()}
@@ -73,50 +79,52 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{fugitive#statusline()}%=%-16(\ %l,%c\ 
 
 " Environment Specific Options
 " ****************************************************************
-if has("gui_running")
-    " Unbreak Unix style mouse selection -> copy
-    vnoremap <LeftRelease> "+y<LeftRelease>gv
 
-    set winaltkeys=no
+colorscheme molokai
 
-    " tab display
-    if v:version >= 700
-        set guitablabel=%L\ %t\ %h
-        set guitabtooltip=%f
-    endif
-
-    " light colors in gui
-    "colorscheme fruit
-    "hi Folded guibg=#f4f4f4 guifg=#444444
-    "colorscheme lingodirector
-    "colorscheme inkpot
-    "hi Folded guibg=#1c314c guifg=#dddddd
-    colorscheme molokai
-    hi Folded guifg=#dddddd guibg=#1B1D1E
-    "colorscheme zenburn
-    "colorscheme darkblue2
-
-    " Setup Toolbars
-    set guioptions=mTt " with menubar and toolbar and tearoffs
-
-    " Set Font
-    if has("win32")
-        set gfn=DejaVu_Sans_Mono:h8:cANSI
-    elseif has("unix")
-        set gfn=DejaVu\ Sans\ Mono\ 10
-    endif
-else
-    " dark colors in terminal
-    colorscheme molokai
-    "colorscheme inkpot
-    "colorscheme zenburn
-    "colorscheme darkblue2
-
-    "set t_Co=256
-    hi Folded guibg=#1c314c guifg=#dddddd
-
-    set mouse=a
-endif
+" if has("gui_running")
+"     " Unbreak Unix style mouse selection -> copy
+"     vnoremap <LeftRelease> "+y<LeftRelease>gv
+" 
+"     set winaltkeys=no
+" 
+"     " tab display
+"     if v:version >= 700
+"         set guitablabel=%L\ %t\ %h
+"         set guitabtooltip=%f
+"     endif
+" 
+"     " light colors in gui
+"     "colorscheme fruit
+"     "hi Folded guibg=#f4f4f4 guifg=#444444
+"     "colorscheme lingodirector
+"     "colorscheme inkpot
+"     "hi Folded guibg=#1c314c guifg=#dddddd
+"     hi Folded guifg=#dddddd guibg=#1B1D1E
+"     "colorscheme zenburn
+"     "colorscheme darkblue2
+" 
+"     " Setup Toolbars
+"     set guioptions=mTt " with menubar and toolbar and tearoffs
+" 
+"     " Set Font
+"     if has("win32")
+"         set gfn=DejaVu_Sans_Mono:h8:cANSI
+"     elseif has("unix")
+"         set gfn=DejaVu\ Sans\ Mono\ 10
+"     endif
+" else
+"     " dark colors in terminal
+"     colorscheme molokai
+"     "colorscheme inkpot
+"     "colorscheme zenburn
+"     "colorscheme darkblue2
+" 
+"     "set t_Co=256
+"     hi Folded guibg=#1c314c guifg=#dddddd
+" 
+"     set mouse=a
+" endif
 
 " Hide Swap Files
 if has("win32")
@@ -148,7 +156,6 @@ let g:sql_type_default='mysql'
 let g:miniBufExplTabWrap=1
 
 " system specific settings
-let g:my_project_root_dir = '/srv'
 let g:CommandTMaxHeight   = 5
 
 " don't load the matchparen plugin
@@ -190,9 +197,9 @@ nnoremap <Leader>e :e ~/.vimrc<CR>
 nnoremap <Leader>o :source ~/.vimrc<CR>
 
 " toggles
-nnoremap <Leader>f :botright copen<CR>
-nnoremap <Leader>x :cclose<CR>
-nnoremap <Leader>t :TlistToggle<CR>
+"nnoremap <Leader>f :botright copen<CR>
+"nnoremap <Leader>x :cclose<CR>
+" nnoremap <Leader>t :TlistToggle<CR>
 nnoremap <Leader>d :NERDTree ~/Desktop<CR>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>b :NERDTree 
@@ -200,9 +207,8 @@ nnoremap <Leader>h :set hls!<CR>
 nnoremap <Leader>r :call ToggleRelativeNumber()<CR>
 vnoremap <Leader>r :call ToggleRelativeNumber()<CR>
 nnoremap <Leader>w :call ToggleWrap()<CR>
-nnoremap <Leader>m :call ToggleMousePaste()<CR>
 nnoremap <Leader>z :syntax on<CR>
-
+map <leader>f :CommandTFlush<CR>
 " ex command for toggling hex mode - define mapping if desired
 " command -bar Hexmode call ToggleHex()
 
@@ -285,25 +291,6 @@ nmap <Leader>xh2 "_yiWcW<h2><C-r>"</h2><ESC>
 nmap <Leader>xh3 "_yiWcW<h3><C-r>"</h3><ESC>
 nmap <Leader>xh4 "_yiWcW<h4 class="example-filename"><C-r>"</h4><ESC>
 
-" PHP Tags/Templating
-vmap <Leader>php c<?php <C-r>" ?><ESC>
-vmap <Leader>pte c<?php echo <C-r>"; ?><ESC>
-vmap <Leader>pt= c<?= <C-r>"; ?><ESC>
-
-nmap <Leader>pte "_yiWcW<?php echo <C-r>; ?><ESC>
-nmap <Leader>ptw "_yiWcW<?php <C-r>; ?><ESC>
-nmap <Leader>pt= "_yiWcW<?= <C-r>"; ?><ESC>
-
-" PHP Debugging
-nmap <Leader>pv "_yiWcWecho "<pre>"; var_dump(<C-r>"); echo "</pre>";<ESC>
-nmap <Leader>pr "_yiWcWecho "<pre>"; print_r(<C-r>"); echo "</pre>";<ESC>
-nmap <Leader>pf "_yiWcWecho "<pre>"; print_r(get_class_methods(<C-r>")); echo "</pre>";<ESC>
-
-nmap <Leader>pdv "_yiWcWecho "<pre>"; var_dump(<C-r>"); echo "</pre>"; exit;<ESC>
-nmap <Leader>pds iecho "<pre>"; var_dump(xdebug_get_function_stack()); echo "</pre>"; exit;<ESC>
-nmap <Leader>pdr "_yiWcWecho "<pre>"; print_r(<C-r>"); echo "</pre>"; exit;<ESC>
-nmap <Leader>pdf "_yiWcWecho "<pre>"; print_r(get_class_methods(<C-r>")); echo "</pre>"; exit;<ESC>
-
 
 " Functions
 " ****************************************************************
@@ -357,20 +344,6 @@ function! StripWhitespace()
 	let currPos=Mark()
 	exe 'v:^--\s*$:s:\s\+$::e'
 	exe currPos
-endfunction
-
-function! ToggleMousePaste()
-    if &mouse == 'a'
-        set paste
-        set mouse=
-        set nonumber
-        echo 'Mouse Paste ON'
-    else
-        set nopaste
-        set number
-        set mouse=a
-        echo 'Mouse Paste OFF'
-    endif
 endfunction
 
 function! ToggleFold()
