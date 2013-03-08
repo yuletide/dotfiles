@@ -1,3 +1,5 @@
+call pathogen#infect()
+
 " Vim Config File
 " standard settings to keep me sane
 "
@@ -155,9 +157,6 @@ let g:html_tag_case='lowercase'
 let g:sql_type_default='mysql'
 let g:miniBufExplTabWrap=1
 
-" system specific settings
-let g:CommandTMaxHeight   = 5
-
 " don't load the matchparen plugin
 let loaded_matchparen = 1
 
@@ -208,7 +207,6 @@ nnoremap <Leader>r :call ToggleRelativeNumber()<CR>
 vnoremap <Leader>r :call ToggleRelativeNumber()<CR>
 nnoremap <Leader>w :call ToggleWrap()<CR>
 nnoremap <Leader>z :syntax on<CR>
-map <leader>f :CommandTFlush<CR>
 " ex command for toggling hex mode - define mapping if desired
 " command -bar Hexmode call ToggleHex()
 
