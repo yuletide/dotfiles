@@ -199,6 +199,7 @@ nnoremap <Leader>o :source ~/.vimrc<CR>
 "nnoremap <Leader>f :botright copen<CR>
 "nnoremap <Leader>x :cclose<CR>
 " nnoremap <Leader>t :TlistToggle<CR>
+nnoremap <Leader>t :CommandT<CR>
 nnoremap <Leader>d :NERDTree ~/Desktop<CR>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>b :NERDTree 
