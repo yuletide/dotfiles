@@ -1,9 +1,5 @@
 #source ~/.bashrc
 source ~/.bash_profile
-alias be="bundle exec"
-
-PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
-
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
