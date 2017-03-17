@@ -1,4 +1,10 @@
-source ~/.bashrc
+#source ~/.bashrc
+source ~/.bash_profile
+alias be="bundle exec"
+
+PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -70,3 +76,8 @@ drop_beats() {
 }
 
 PROMPT='%{$fg[blue]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
