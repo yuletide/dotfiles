@@ -165,6 +165,21 @@ let g:my_project_current_project = ''
 
 let g:NERDShutUp = 1
 
+
+" SYNTASTIC SETTINGS
+" 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_closurecompiler_script = '/usr/local/bin/closure-compiler'
+let g:syntastic_javascript_checkers=['eslint']
+
+
 " Auto Commands
 " ****************************************************************
 " set file types
@@ -423,3 +438,6 @@ function! ToggleHex()
     let &readonly=l:oldreadonly
     let &modifiable=l:oldmodifiable
 endfunction
+
+
+
