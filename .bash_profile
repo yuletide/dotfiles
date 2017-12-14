@@ -1,9 +1,8 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-#source ~/.profile
 
 alias be="bundle exec"
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
+#export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
 
 # settings for qgis plugin dev
