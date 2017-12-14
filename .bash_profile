@@ -6,11 +6,8 @@ alias be="bundle exec"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin:$PATH"
 
 
-# settings for Mapnik.framework Installer to enable Mapnik programs and python bindings
-export PATH=/Library/Frameworks/Mapnik.framework/Programs:$PATH
-export PYTHONPATH=/Library/Frameworks/Mapnik.framework/Python:$PYTHONPATH
 # settings for qgis plugin dev
-export QGIS_PLUGINPATH=/Users/ayule/code/qgis_plugins:
+#export QGIS_PLUGINPATH=/Users/ayule/code/qgis_plugins:
 export GDAL_DATA=/usr/local/share/gdal:$GDAL_DATA
 
 # Settings for postgres
@@ -25,3 +22,5 @@ export EC2_HOME=~/.ec2
 # export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
 export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
 
+#only for work machine
+source ~/.mbenv
