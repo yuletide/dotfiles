@@ -1,4 +1,28 @@
-call pathogen#infect()
+if !has('nvim')
+  call plug#begin('~/.vim/plugged')
+else
+  call plug#begin('~/.local/share/nvim/plugged')
+endif
+
+" vim-plug
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+
+Plug 'tpope/vim-pathogen'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-syntastic/syntastic'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'scrooloose/nerdtree'
+
+Plug 'vim-scripts/Gist.vim'
+Plug 'mattn/webapi-vim' " Required for Gist.vim
+Plug 'valloric/youcompleteme'
+
+call plug#end()
+
 
 " Vim Config File
 " standard settings to keep me sane
@@ -6,11 +30,11 @@ call pathogen#infect()
 " Dependencies:
 "     par
 "     perl
-"     ruby (for Command-T)
 "
-" Last Modified: 11/13/2010
+" Last Modified: 1/9/2018
 " ****************************************************************
 
+set mouse=a
 filetype indent plugin on
 syntax enable
 
@@ -82,51 +106,14 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{fugitive#statusline()}%=%-16(\ %l,%c\ 
 " Environment Specific Options
 " ****************************************************************
 
-colorscheme molokai
+" colorscheme minimalist
+colorscheme focuspoint
+"colorscheme molokai
 
-" if has("gui_running")
-"     " Unbreak Unix style mouse selection -> copy
-"     vnoremap <LeftRelease> "+y<LeftRelease>gv
-" 
-"     set winaltkeys=no
-" 
-"     " tab display
-"     if v:version >= 700
-"         set guitablabel=%L\ %t\ %h
-"         set guitabtooltip=%f
-"     endif
-" 
-"     " light colors in gui
-"     "colorscheme fruit
-"     "hi Folded guibg=#f4f4f4 guifg=#444444
-"     "colorscheme lingodirector
-"     "colorscheme inkpot
-"     "hi Folded guibg=#1c314c guifg=#dddddd
-"     hi Folded guifg=#dddddd guibg=#1B1D1E
-"     "colorscheme zenburn
-"     "colorscheme darkblue2
-" 
-"     " Setup Toolbars
-"     set guioptions=mTt " with menubar and toolbar and tearoffs
-" 
-"     " Set Font
-"     if has("win32")
-"         set gfn=DejaVu_Sans_Mono:h8:cANSI
-"     elseif has("unix")
-"         set gfn=DejaVu\ Sans\ Mono\ 10
-"     endif
-" else
 "     " dark colors in terminal
 "     colorscheme molokai
-"     "colorscheme inkpot
-"     "colorscheme zenburn
-"     "colorscheme darkblue2
-" 
-"     "set t_Co=256
-"     hi Folded guibg=#1c314c guifg=#dddddd
-" 
-"     set mouse=a
-" endif
+"colorscheme inkpot
+"colorscheme zenburn
 
 " Hide Swap Files
 if has("win32")
@@ -154,11 +141,11 @@ let Tlist_Use_Right_Window = 1
 " Filetype Plugin Settings
 let g:no_html_tab_mapping=1 " let me insert tabs when i press the freakin tab key!
 let g:html_tag_case='lowercase'
-let g:sql_type_default='mysql'
+let g:sql_type_default='postgres'
 let g:miniBufExplTabWrap=1
 
 " don't load the matchparen plugin
-let loaded_matchparen = 1
+"let loaded_matchparen = 1
 
 let g:my_project_tagfile_name = 'tags'
 let g:my_project_current_project = ''
@@ -182,25 +169,12 @@ let g:syntastic_javascript_checkers=['eslint']
 
 " Auto Commands
 " ****************************************************************
-" set file types
-autocmd BufRead *.as    set ft=actionscript
-autocmd BufRead *.mxml  set ft=mxml
-autocmd BufRead *.sql   set ft=mysql
-autocmd BufRead *.conf  set ft=apache
-autocmd BufRead *.tpl   set ft=php
-autocmd BufRead *.phtml set ft=php
-autocmd BufRead *.wsgi  set ft=python
-autocmd BufWrite *.wsgi  set ft=python
-
-" setup tags files
-"autocmd BufRead *.* call SetupProject()
-
 " add the closetag script
-autocmd FileType xml,xhtml,html,php,phtml,ruby,erb runtime scripts/closetag.vim
-
+"autocmd FileType xml,xhtml,html,php,phtml,ruby,erb runtime scripts/closetag.vim
 
 " Key Mappings
 " ****************************************************************
+
 " auto insert curly braces on Control-F
 nnoremap <space> :call ToggleFold()<CR>
 
@@ -284,7 +258,7 @@ vmap <Leader>xl c<li><C-r>"</li><ESC>
 vmap <Leader>xa c<a href=""><C-r>"</a><ESC>
 vmap <Leader>xu c<ul><C-r>"</ul><ESC>
 vmap <Leader>xo c<ol><C-r>"</ol><ESC>
-vmap <Leader>xp c<\p><C-r>"</p><ESC>
+vmap <Leader>xp c<\p><C-r>"</><ESC>
 vmap <Leader>xr c<\pre><C-r>"</pre><ESC>
 vmap <Leader>xh1 c<h1 class="section-header"><C-r>"</h1><ESC>
 vmap <Leader>xh2 c<h2><C-r>"</h2><ESC>
@@ -305,6 +279,11 @@ nmap <Leader>xh2 "_yiWcW<h2><C-r>"</h2><ESC>
 nmap <Leader>xh3 "_yiWcW<h3><C-r>"</h3><ESC>
 nmap <Leader>xh4 "_yiWcW<h4 class="example-filename"><C-r>"</h4><ESC>
 
+
+" Vim-Javascript 
+let g:javascript_plugin_jsdoc = 1
+" For JSX parsing
+let g:jsx_ext_required = 0
 
 " Functions
 " ****************************************************************
@@ -438,6 +417,3 @@ function! ToggleHex()
     let &readonly=l:oldreadonly
     let &modifiable=l:oldmodifiable
 endfunction
-
-
-
