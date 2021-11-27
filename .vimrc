@@ -9,22 +9,25 @@ endif
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 
-Plug 'tpope/vim-pathogen'
+"Plug 'tpope/vim-pathogen'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-syntastic/syntastic'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'scrooloose/nerdtree'
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'vim-scripts/Gist.vim'
 Plug 'mattn/webapi-vim' " Required for Gist.vim
-Plug 'valloric/youcompleteme'
+"Plug 'valloric/youcompleteme', { 'do': './install.py --js-completer' }
 
 call plug#end()
 
 
-" Vim Config File
+let g:ycm_server_keep_logfiles = 1 
+let g:ycm_server_log_level = 'debug'
 " standard settings to keep me sane
 "
 " Dependencies:

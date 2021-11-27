@@ -7,11 +7,15 @@ alias be="bundle exec"
 
 # settings for qgis plugin dev
 #export QGIS_PLUGINPATH=/Users/ayule/code/qgis_plugins:
-export GDAL_DATA=/usr/local/share/gdal:$GDAL_DATA
+# export GDAL_DATA=/usr/local/Cellar/gdal/1.11.5_3/share/gdal
 
+# Settings for pipenv
+export PATH=~/.local/bin:$PATH
 # Settings for postgres
 export PGDATA=/usr/local/var/postgres:$PGDATA
+# export PATH=~/Library/Python/3.9/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
 
 alias lsf='ls -Foah'
 
@@ -23,3 +27,6 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
 
 #only for work machine
 source ~/.mbenv
+
+# added by Anaconda3 5.0.1 installer
+export PATH="/Users/alexyule/anaconda3/bin:$PATH"
