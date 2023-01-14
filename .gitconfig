@@ -1,0 +1,8 @@
+[init]
+	defaultBranch = main
+[merge]
+  tool = meld
+[push]
+	autoSetupRemote = true
+[core]
+	excludesFile = ~/.gitignore
