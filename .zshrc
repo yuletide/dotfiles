@@ -1,5 +1,5 @@
 #source ~/.bashrc
-source ~/.bash_profile
+# source ~/.bash_profile
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -32,14 +32,15 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby rvm python npm node osx)
+#plugins=(git python npm node osx)
+plugins=(git python npm node last-working-dir)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
-export CLICOLOR=1
+# export CLICOLOR=1
 setopt APPEND_HISTORY
 
 dharma=$'☸'
@@ -71,9 +72,37 @@ drop_beats() {
   echo "%{$fg[red]%}$dharma%{$reset_color%} "
 }
 
-PROMPT='%{$fg[blue]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
+alias lsf="ls -Foah"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/ayule/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/ayule/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/ayule/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/ayule/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+
+# PROMPT='%{$fg[blue]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
+PROMPT='%{$fg_bold[cyan]%}%2~%{$reset_color%}$(git_custom_status) $(drop_beats)'
+# PROMPT="$PROMPT $(drop_beats)"
+
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# nodenv
+eval "$(nodenv init -)"
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
+
+# Poetry
+export PATH="/Users/ayule/.local/bin:$PATH"
+
+source ~/.mbxenv
